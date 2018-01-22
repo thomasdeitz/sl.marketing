@@ -12,6 +12,16 @@
 	  return isVisible; 
 	}
 	
+	function isScrolledPastInitialView(id) {
+	  var elemBottom = document.getElementById(id).getBoundingClientRect().bottom;
+	  var isNotVisible = elemBottom < 0; 
+	  if (isNotVisible) {
+	      document.getElementsByTagName('body')[0].classList.add("past-initial");
+	  } else {
+		  document.getElementsByTagName('body')[0].classList.remove("past-initial");
+	  }
+	}
+	
 	// Displays elements that are in view 
 	function onScroll(cl) {
 	  var elem = document.getElementsByTagName(cl);
@@ -24,7 +34,7 @@
 	}
 	
 	// Fires display elements in view on scroll
-	window.onscroll = function() {onScroll("p");onScroll("li");};
+	window.onscroll = function() {onScroll("p");onScroll("li"); isScrolledPastInitialView('hero');};
 	
 	// Removes loading state class once all assets are loaded into the dom
 	document.onreadystatechange = function () {
