@@ -22,6 +22,16 @@
 	  }
 	}
 	
+	function isScrolledPastHeader(id) {
+	  var elemTop = document.getElementById(id).getBoundingClientRect().top;
+	  var isNotVisible = elemTop < -50; 
+	  if (isNotVisible) {
+	      document.getElementsByTagName('body')[0].classList.add("past-header");
+	  } else {
+		  document.getElementsByTagName('body')[0].classList.remove("past-header");
+	  }
+	}
+	
 	// Displays elements that are in view 
 	function onScroll(cl) {
 	  var elem = document.getElementsByTagName(cl);
@@ -34,7 +44,7 @@
 	}
 	
 	// Fires display elements in view on scroll
-	window.onscroll = function() {onScroll("p");onScroll("li"); isScrolledPastInitialView('hero');};
+	window.onscroll = function() {onScroll("p");onScroll("li"); isScrolledPastInitialView('hero'); isScrolledPastHeader('hero');};
 	
 	// Removes loading state class once all assets are loaded into the dom
 	document.onreadystatechange = function () {
